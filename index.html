@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby Shower · Julieta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(ellipse at top, #fde8f0 0%, #f9cfe2 60%, #f5b8d4 100%);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 24px 16px 40px;
+            font-family: 'Lato', sans-serif;
+        }
+
+        /* ── Card ── */
+        .card {
+            background: #fffafc;
+            border-radius: 24px;
+            max-width: 420px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 12px 50px rgba(190, 80, 120, 0.22);
+            animation: fadeUp 0.9s ease both;
+            position: relative;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Illustration (top portion of original image) ── */
+        .illustration {
+            position: relative;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .illustration img {
+            width: 100%;
+            height: 340px;
+            object-fit: cover;
+            object-position: top;
+            display: block;
+        }
+
+        /* Fade-out bottom of illustration into card */
+        .illustration::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, #fffafc);
+        }
+
+        /* ── Animated butterflies ── */
+        .butterfly {
+            position: absolute;
+            font-size: 22px;
+            pointer-events: none;
+            animation: flutter 2.8s ease-in-out infinite;
+            z-index: 5;
+        }
+        .butterfly:nth-child(1) { top: 55px;  left: 14px;  animation-delay: 0s;    font-size: 20px; }
+        .butterfly:nth-child(2) { top: 20px;  left: 16px;  animation-delay: 0.7s;  font-size: 24px; }
+        .butterfly:nth-child(3) { top: 110px; right: 28px; animation-delay: 1.4s;  font-size: 18px; }
+
+        @keyframes flutter {
+            0%,100% { transform: translateY(0)   rotate(-6deg) scaleX(1); }
+            50%      { transform: translateY(-10px) rotate(6deg)  scaleX(-1); }
+        }
+
+        /* ── Content ── */
+        .content {
+            padding: 8px 30px 32px;
+            text-align: center;
+            background: linear-gradient(to bottom, #fffafc, #fdf0f8);
+        }
+
+        .intro { font-family: 'Playfair Display', serif; font-style: italic; color: #a06278; font-size: 13.5px; letter-spacing: 0.8px; }
+        .title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 38px; color: #7d2e48; letter-spacing: 5px; margin: 2px 0 4px; line-height: 1.1; }
+        .de    { font-family: 'Playfair Display', serif; font-style: italic; color: #a06278; font-size: 13.5px; letter-spacing: 0.8px; }
+        .name  { font-family: 'Dancing Script', cursive; font-size: 58px; color: #7d2e48; line-height: 1.15; margin-bottom: 14px; }
+
+        .divider {
+            width: 80px; height: 1.5px;
+            background: linear-gradient(to right, transparent, #e8a0bc, transparent);
+            margin: 0 auto 18px;
+        }
+
+        /* ── Event details ── */
+        .details-grid {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 10px;
+        }
+        .detail {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 13.5px; color: #7a4055; font-weight: 400;
+        }
+        .detail-icon { font-size: 15px; }
+        .location-row {
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            font-size: 13.5px; color: #7a4055; margin-bottom: 2px;
+        }
+
+        /* ── Countdown ── */
+        .countdown {
+            margin: 18px 0;
+            padding: 14px 10px 12px;
+            background: rgba(232, 130, 160, 0.08);
+            border: 1px solid rgba(232, 130, 160, 0.22);
+            border-radius: 14px;
+        }
+        .countdown-label {
+            font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+            color: #b07a90; margin-bottom: 10px;
+        }
+        .countdown-row { display: flex; justify-content: center; align-items: flex-start; gap: 6px; }
+        .cd-box { text-align: center; min-width: 54px; }
+        .cd-num  { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; color: #c96080; line-height: 1; }
+        .cd-unit { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: #b07a90; margin-top: 2px; }
+        .cd-sep  { font-size: 26px; color: #e8a0bc; padding-top: 2px; }
+
+        /* ── Section label ── */
+        .section-label {
+            display: flex; align-items: center; gap: 10px;
+            margin: 22px 0 14px;
+        }
+        .section-label::before,
+        .section-label::after {
+            content: ''; flex: 1; height: 1px;
+            background: linear-gradient(to right, transparent, #e8a0bc);
+        }
+        .section-label::after { background: linear-gradient(to left, transparent, #e8a0bc); }
+        .section-label span { font-size: 12.5px; color: #a06278; font-style: italic; white-space: nowrap; }
+
+        /* ── WhatsApp button ── */
+        .btn-whatsapp {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            width: 100%; padding: 13px 20px;
+            background: linear-gradient(135deg, #25d366, #1aaf55);
+            color: #fff; border-radius: 50px;
+            text-decoration: none; font-size: 15px; font-weight: 600; letter-spacing: 0.3px;
+            box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+            transition: transform 0.18s, box-shadow 0.18s;
+            margin-bottom: 20px;
+        }
+        .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 7px 22px rgba(37, 211, 102, 0.45); }
+        .btn-whatsapp svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+        /* ── Gift section ── */
+        .gift-text {
+            font-size: 13px; color: #a06278; margin-bottom: 12px;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+        .btn-gift {
+            display: inline-block; padding: 11px 36px;
+            background: linear-gradient(135deg, #e8829a, #c9607c);
+            color: #fff; border-radius: 50px;
+            text-decoration: none; font-size: 14.5px; font-weight: 600; letter-spacing: 0.3px;
+            box-shadow: 0 4px 16px rgba(201, 96, 124, 0.35);
+            transition: transform 0.18s, box-shadow 0.18s;
+        }
+        .btn-gift:hover { transform: translateY(-2px); box-shadow: 0 7px 22px rgba(201, 96, 124, 0.45); }
+
+        .gift-url {
+            display: block; font-size: 10.5px; color: #c09ab0;
+            margin-top: 8px; letter-spacing: 0.3px;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            font-family: 'Dancing Script', cursive;
+            font-size: 32px; color: #7d2e48;
+            margin-top: 22px; line-height: 1.2;
+        }
+        .footer-flowers { font-size: 18px; margin-top: 4px; letter-spacing: 4px; }
+
+        /* ── Modal segundo WhatsApp ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(100, 30, 60, 0.45);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        .modal-overlay.show { display: flex; animation: fadeIn 0.2s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .modal-box {
+            background: #fffafc;
+            border-radius: 20px;
+            padding: 28px 26px 24px;
+            max-width: 320px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 16px 50px rgba(150, 40, 80, 0.25);
+            animation: popUp 0.25s ease;
+        }
+        @keyframes popUp {
+            from { transform: scale(0.85); opacity: 0; }
+            to   { transform: scale(1);    opacity: 1; }
+        }
+        .modal-emoji  { font-size: 36px; margin-bottom: 10px; }
+        .modal-title  { font-family: 'Playfair Display', serif; font-size: 17px; color: #7d2e48; font-weight: 700; margin-bottom: 6px; }
+        .modal-text   { font-size: 13px; color: #a06278; margin-bottom: 18px; line-height: 1.5; }
+        .modal-btn {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            width: 100%; padding: 12px;
+            background: linear-gradient(135deg, #25d366, #1aaf55);
+            color: #fff; border-radius: 50px; text-decoration: none;
+            font-size: 14px; font-weight: 600;
+            box-shadow: 0 4px 14px rgba(37,211,102,0.35);
+            margin-bottom: 10px;
+            transition: transform 0.15s;
+        }
+        .modal-btn:hover { transform: translateY(-2px); }
+        .modal-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+        .modal-close {
+            background: none; border: none; cursor: pointer;
+            font-size: 12px; color: #c09ab0; padding: 4px 10px;
+            border-radius: 20px; transition: color 0.15s;
+        }
+        .modal-close:hover { color: #7d2e48; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+
+    <!-- Illustration: shows top (bunny + flowers) of original image -->
+    <div class="illustration">
+        <img src="WhatsApp Image 2026-06-13 at 12.05.35 AM.jpeg" alt="Decoración Baby Shower">
+        <span class="butterfly">🦋</span>
+        <span class="butterfly">🦋</span>
+        <span class="butterfly">🦋</span>
+    </div>
+
+    <div class="content">
+
+        <p class="intro">Te invitamos a celebrar el</p>
+        <h1 class="title">BABY SHOWER</h1>
+        <p class="de">De nuestra princesa</p>
+        <h2 class="name">Julieta</h2>
+
+        <div class="divider"></div>
+
+        <div class="details-grid">
+            <div class="detail"><span class="detail-icon">📅</span> Sábado 16 de julio</div>
+            <div class="detail"><span class="detail-icon">🕓</span> 16:00 hrs</div>
+        </div>
+        <div class="location-row"><span class="detail-icon">📍</span> Bandera 940, Concepción</div>
+
+        <!-- Cuenta regresiva -->
+        <div class="countdown">
+            <p class="countdown-label">Cuenta regresiva</p>
+            <div class="countdown-row">
+                <div class="cd-box"><div class="cd-num" id="cd-d">--</div><div class="cd-unit">días</div></div>
+                <div class="cd-sep">:</div>
+                <div class="cd-box"><div class="cd-num" id="cd-h">--</div><div class="cd-unit">horas</div></div>
+                <div class="cd-sep">:</div>
+                <div class="cd-box"><div class="cd-num" id="cd-m">--</div><div class="cd-unit">min</div></div>
+                <div class="cd-sep">:</div>
+                <div class="cd-box"><div class="cd-num" id="cd-s">--</div><div class="cd-unit">seg</div></div>
+            </div>
+        </div>
+
+        <!-- Confirmar asistencia -->
+        <div class="section-label"><span>¡Confirma tu asistencia!</span></div>
+
+        <a class="btn-whatsapp" href="#" onclick="confirmar(event)">
+            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.557 4.116 1.533 5.845L.057 23.5a.5.5 0 00.614.614l5.702-1.48A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.944 9.944 0 01-5.174-1.432l-.37-.22-3.384.879.892-3.33-.24-.384A9.955 9.955 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm5.472-7.618c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.196.298-.766.967-.94 1.165-.172.198-.347.223-.644.074-.297-.148-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.457.13-.606.134-.133.298-.347.447-.52.148-.174.197-.298.297-.497.1-.198.05-.371-.025-.52-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            </svg>
+            Confirmar asistencia
+        </a>
+
+        <!-- Regalos -->
+        <div class="section-label"><span>¿Quieres regalarle algo?</span></div>
+
+        <a class="btn-gift" href="https://www.wishbob.com/kzghfsdlaw" target="_blank" rel="noopener noreferrer">
+            🎁 Lista de regalos
+        </a>
+
+        <p class="footer">¡Te esperamos!</p>
+        <p class="footer-flowers">🌸 🌷 🌸</p>
+
+    </div>
+</div>
+
+<script>
+    const eventDate = new Date('2026-07-16T16:00:00');
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function tick() {
+        const diff = eventDate - new Date();
+        if (diff <= 0) {
+            document.querySelector('.countdown').innerHTML =
+                '<p style="color:#c9607c;font-weight:700;font-size:16px">🎉 ¡Hoy es el gran día!</p>';
+            return;
+        }
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        document.getElementById('cd-d').textContent = pad(d);
+        document.getElementById('cd-h').textContent = pad(h);
+        document.getElementById('cd-m').textContent = pad(m);
+        document.getElementById('cd-s').textContent = pad(s);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+
+    function confirmar(e) {
+        e.preventDefault();
+        const msg = encodeURIComponent('¡Hola! Confirmo mi asistencia al Baby Shower de Julieta 🎀');
+        window.open('https://wa.me/56926173024?text=' + msg, '_blank');
+        document.getElementById('modal-segundo').classList.add('show');
+    }
+
+    function cerrarModal() {
+        document.getElementById('modal-segundo').classList.remove('show');
+    }
+</script>
+
+<!-- Modal: segundo WhatsApp -->
+<div class="modal-overlay" id="modal-segundo" onclick="if(event.target===this) cerrarModal()">
+    <div class="modal-box">
+        <div class="modal-emoji">🎀</div>
+        <p class="modal-title">¡Un paso más!</p>
+        <p class="modal-text">Por favor confirma también con el segundo contacto para asegurarnos de que llegue a las dos:</p>
+        <a class="modal-btn"
+           href="https://wa.me/56961915974?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20al%20Baby%20Shower%20de%20Julieta%20%F0%9F%8E%80"
+           target="_blank" rel="noopener noreferrer"
+           onclick="cerrarModal()">
+            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.557 4.116 1.533 5.845L.057 23.5a.5.5 0 00.614.614l5.702-1.48A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.944 9.944 0 01-5.174-1.432l-.37-.22-3.384.879.892-3.33-.24-.384A9.955 9.955 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm5.472-7.618c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.196.298-.766.967-.94 1.165-.172.198-.347.223-.644.074-.297-.148-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.457.13-.606.134-.133.298-.347.447-.52.148-.174.197-.298.297-.497.1-.198.05-.371-.025-.52-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            </svg>
+            Confirmar con el segundo contacto
+        </a>
+        <button class="modal-close" onclick="cerrarModal()">Cerrar</button>
+    </div>
+</div>
+
+</body>
+</html>
